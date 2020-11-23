@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://kit.fontawesome.com/376c0f6bb4.js" crossorigin="anonymous"></script>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Bookers</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+      <li class="nav-item active">
+        <i class="fas fa-home"> <%= link_to 'Homes', user_path(current_user), class: 'nav-link text-dark' %></i>
+      </li>
+      <li class="nav-item">
+        <i class="fas fa-users"><%= link_to 'Users', users_path, class: 'nav-link text-dark' %></i>
+      </li>
+      <li class="nav-item">
+        <i class="fad fa-book"><%= link_to 'Books', books_path, class: 'nav-link text-dark' %></i>
+      </li>
+      <li class="nav-item">
+        <i class="fal fa-sign-out-alt"><%= link_to "logout", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %></i>
+
+      </li>
+      <% else %>
+      <li class="nav-item active">
+        <i class="fas fa-home"> <%= link_to 'Homes', root_path, class: 'nav-link text-dark' %></i>
+      </li>
+      <li class="nav-item">
+        <i class="fas fa-link"><%= link_to 'About', root_path, class: 'nav-link text-dark' %></i>
+      </li>
+      <li class="nav-item">
+        <i class="fas fa-user-plus"><%= link_to "Sign up", new_user_registration_path, class: 'nav-link text-dark' %></i>
+      </li>
+      <li class="nav-item">
+        <i class="fas fa-sign-in-alt"><%= link_to "Log in", new_user_session_path, class: 'nav-link text-dark' %></i></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      <% end %>
+      <%= yield %>
+      <div class="social"></div>
+    </header>
+  </body>
+</html>
