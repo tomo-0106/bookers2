@@ -10,50 +10,49 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+<body>
+  <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><span>Bookers</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDoropdown" aria-controls="#navbarNavDoropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDoropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item active">
+              <i class="fas fa-home navlink text-light"> <%= link_to 'Homes', user_path(current_user) %></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-users navlink text-light"><%= link_to 'Users', users_path %></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-book-open navlink text-light"><%= link_to 'Books', books_path %></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-sign-out-alt navlink text-light"><%= link_to "logout", destroy_user_session_path, method: :delete %></i>
+            </li>
+            <% else %>
+            <li class="nav-item active">
+              <i class="fas fa-home navlink text-light"> <%= link_to 'Homes', root_path %></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-link navlink text-light"><%= link_to 'About', home_about_path %></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-user-plus navlink text-light"><%= link_to "sign up", new_user_registration_path %></i>
+            </li>
+            <li class="nav-item">
+              <i class="fas fa-sign-in-alt navlink text-light"><%= link_to "Login", new_user_session_path %></i>
+            </li>
+             <% end %>
+        </ul>
+      </div>
+    </nav>b
+   </header>
 
-  <body>
-    <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Bookers</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <% if user_signed_in? %>
-      <li class="nav-item active">
-        <i class="fas fa-home"> <%= link_to 'Homes', user_path(current_user), class: 'nav-link text-dark' %></i>
-      </li>
-      <li class="nav-item">
-        <i class="fas fa-users"><%= link_to 'Users', users_path, class: 'nav-link text-dark' %></i>
-      </li>
-      <li class="nav-item">
-        <i class="fad fa-book"><%= link_to 'Books', books_path, class: 'nav-link text-dark' %></i>
-      </li>
-      <li class="nav-item">
-        <i class="fal fa-sign-out-alt"><%= link_to "logout", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %></i>
 
-      </li>
-      <% else %>
-      <li class="nav-item active">
-        <i class="fas fa-home"> <%= link_to 'Homes', root_path, class: 'nav-link text-dark' %></i>
-      </li>
-      <li class="nav-item">
-        <i class="fas fa-link"><%= link_to 'About', root_path, class: 'nav-link text-dark' %></i>
-      </li>
-      <li class="nav-item">
-        <i class="fas fa-user-plus"><%= link_to "Sign up", new_user_registration_path, class: 'nav-link text-dark' %></i>
-      </li>
-      <li class="nav-item">
-        <i class="fas fa-sign-in-alt"><%= link_to "Log in", new_user_session_path, class: 'nav-link text-dark' %></i></i>
-      </li>
-    </ul>
-  </div>
-</nav>
+    <%= yield %>
+</body>
 
-      <% end %>
-      <%= yield %>
-      <div class="social"></div>
-    </header>
-  </body>
 </html>

@@ -1,15 +1,19 @@
+<body>
+<div class="container">
+ <div class="row">
+ <div class="col-md-3">
 <div>
   <h1>User info</h1>
-  
 
-   <%= attachment_image_tag current_user, :profile_image, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg" %>
+
+   <%= attachment_image_tag current_user, :profile_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg" %>
   <p>name：<%= current_user.name %></p>
   <p>introduction：<%= current_user.introduction %></p>
-    <p><%= link_to "プロフィール編集", edit_user_path(current_user) %></p>
+    <p><%= link_to edit_user_path(current_user) do %><i class="fas fa-user-cog"></i><% end %></p>
  </div>
 
 <div>
-<h1>New Book</h1>
+<h1>New book</h1>
 <%= form_with model: @book, local:true do |f| %>
 <h4>Title</h4>
 <%= f.text_field :title %>
@@ -18,7 +22,8 @@
 <%= f.submit 'Create Book' %>
 <% end %>
 </div>
-
+</div>
+  <div class="col-md-8 offset-md-1">
   <h1>Users</h1>
   <table class="table">
    <thead>
@@ -31,11 +36,15 @@
    <% @users.each do |user| %>
    <tbody>
     <tr>
-     <th><%= attachment_image_tag user, :profile_image, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg" %></th>
+     <th><%= attachment_image_tag user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg" %></th>
      <th><%= user.name %></th>
-     <th><%= link_to "show", user_path(user.id) %></th>
+     <th><%= link_to "Show", user_path(user.id) %></th>
     </tr>
    </tbody>
    <% end %>
+   </div>
    </table>
-
+</div>
+</div>
+</div>
+</body>
